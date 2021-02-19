@@ -4939,7 +4939,7 @@ function _Browser_load(url)
 	}));
 }
 var $elm$core$Basics$False = {$: 'False'};
-var $author$project$Main$init = {received: false, request: false};
+var $author$project$Main$init = {received: false, receivedDummie: false, request: false};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -10563,6 +10563,14 @@ var $author$project$Main$update = F2(
 				return _Utils_update(
 					model,
 					{received: true});
+			case 'WebcomponentEventClick':
+				return _Utils_update(
+					model,
+					{received: true});
+			case 'WebcomponentDummieClick':
+				return _Utils_update(
+					model,
+					{receivedDummie: true});
 			case 'Request':
 				return _Utils_update(
 					model,
@@ -10570,12 +10578,14 @@ var $author$project$Main$update = F2(
 			default:
 				return _Utils_update(
 					model,
-					{received: false, request: false});
+					{received: false, receivedDummie: false, request: false});
 		}
 	});
 var $author$project$Main$Request = {$: 'Request'};
 var $author$project$Main$Reset = {$: 'Reset'};
+var $author$project$Main$WebcomponentDummieClick = {$: 'WebcomponentDummieClick'};
 var $author$project$Main$WebcomponentEvent = {$: 'WebcomponentEvent'};
+var $author$project$Main$WebcomponentEventClick = {$: 'WebcomponentEventClick'};
 var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
 var $author$project$Main$view = function (model) {
 	return A2(
@@ -10612,6 +10622,15 @@ var $author$project$Main$view = function (model) {
 						model.received ? 'true' : 'false')
 					])),
 				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('received dummie:'),
+						$elm$html$Html$text(
+						model.receivedDummie ? 'true' : 'false')
+					])),
+				A2(
 				$elm$html$Html$button,
 				_List_fromArray(
 					[
@@ -10635,10 +10654,36 @@ var $author$project$Main$view = function (model) {
 						'requeststate',
 						model.request ? 'requested' : 'idle')
 					]),
+				_List_Nil),
+				A3(
+				$elm$html$Html$node,
+				'webcomponent-click',
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$Events$on,
+						'created',
+						$elm$json$Json$Decode$succeed($author$project$Main$WebcomponentEventClick))
+					]),
+				_List_Nil),
+				A3(
+				$elm$html$Html$node,
+				'webcomponent-dummie-click',
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$Events$on,
+						'created',
+						$elm$json$Json$Decode$succeed($author$project$Main$WebcomponentDummieClick)),
+						A2(
+						$elm$html$Html$Attributes$attribute,
+						'requeststate',
+						model.request ? 'requested' : 'idle')
+					]),
 				_List_Nil)
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$sandbox(
 	{init: $author$project$Main$init, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))({"versions":{"elm":"0.19.1"},"types":{"message":"Main.Msg","aliases":{},"unions":{"Main.Msg":{"args":[],"tags":{"Request":[],"Reset":[],"WebcomponentEvent":[]}}}}})}});}(this));
+	$elm$json$Json$Decode$succeed(_Utils_Tuple0))({"versions":{"elm":"0.19.1"},"types":{"message":"Main.Msg","aliases":{},"unions":{"Main.Msg":{"args":[],"tags":{"Request":[],"Reset":[],"WebcomponentEvent":[],"WebcomponentEventClick":[],"WebcomponentDummieClick":[]}}}}})}});}(this));
